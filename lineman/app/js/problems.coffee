@@ -3,6 +3,7 @@ render = ->
 
 $ ->
   render()
+
   $('.main').on 'click', 'button.new-problem', ->
     # get a new problem (e.g. $.get '/problem/random')
 

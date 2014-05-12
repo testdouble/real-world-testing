@@ -1,0 +1,2 @@
+describe 'Foo', ->
+  Then -> true

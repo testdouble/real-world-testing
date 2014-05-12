@@ -9,13 +9,13 @@ describe "GET /problem/random", ->
   And -> _(["*", "+", "-", "/"]).include(@json.operator)
   And -> @json.description == "#{@json.operands.left} #{@json.operator} #{@json.operands.right}"
 
-describe "GET /problem/:id", ->
+describe.only "GET /problem/:id", ->
   Given (done) -> GET "/problem/random", done, (err, res) => @problem = res.json
   When (done) -> GET "/problem/#{@problem.id}", done, (err, res) => @result = res
   Then -> expect(@result.json).toEqual(@problem)
 
 describe "POST /solution", ->
-  Given (done) -> GET "/problem", done, (err, res) => @problem = res.json
+  Given (done) -> GET "/problem/random", done, (err, res) => @problem = res.json
 
   context "a correct answer", ->
     Given -> @solution =

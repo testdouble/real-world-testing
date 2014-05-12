@@ -1,4 +1,5 @@
 express = require("express")
+manageProblems = require("./lib/manage-problems")
 
 app = express()
 
@@ -7,11 +8,11 @@ app.use(express.bodyParser())
 app.get "/", (req, res, err) ->
   res.send 200
 
-app.get "/problem", (req, res, err) ->
-  res.send(501)
+app.get "/problem/random", (req, res, err) ->
+  res.json(manageProblems.generate())
 
 app.get "/problem/:id", (req, res, err) ->
-  res.send(501)
+  res.json(manageProblems.find(req.query.id))
 
 app.post "/solution", (req, res, err) ->
   res.send(501)
