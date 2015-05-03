@@ -1,4 +1,4 @@
-/* jasmine-stealth - 0.0.15
+/* jasmine-stealth - 0.0.17
  * Makes Jasmine spies a bit more robust
  * https://github.com/searls/jasmine-stealth
  */
@@ -8,7 +8,7 @@
 
   (function() {
     var Captor, fake, root, stubChainer, unfakes, whatToDoWhenTheSpyGetsCalled, _;
-    root = this;
+    root = (1, eval)('this');
     _ = function(obj) {
       return {
         each: function(iterator) {
@@ -138,7 +138,7 @@
       var addStubbing;
       addStubbing = function(satisfaction) {
         return function(thenThat) {
-          spy._stealth_stubbings.push({
+          spy._stealth_stubbings.unshift({
             type: type,
             ifThis: ifThis,
             satisfaction: satisfaction,
