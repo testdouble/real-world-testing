@@ -1,12 +1,13 @@
 window.ConvertsNumerals = function() {
 	
+	var VALUES = {
+		"I" : 1,
+		"II": 2,
+		"III": 3,
+		"IV": 4
+	};
+
 	this.fromRoman = function(input) {
-		if (input === "I") {
-			return 1;
-		} else if (input === "II"){
-			return 2;
-		} else {
-			return 3;
-		};
+		return VALUES[input]
 	};
 };
