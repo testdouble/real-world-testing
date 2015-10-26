@@ -4,6 +4,7 @@
 #  Simplest thing that would work
 #  Refactor and condense
 #  Fine to write a lot of english at first
+#  Always look to see test fail first - work incrementally
 
 describe "Roman Numeral Converter", ->
   Given -> @subject = new ConvertsNumerals()
