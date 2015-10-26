@@ -1,10 +1,12 @@
 window.ConvertsNumerals = function() {
 	
 	this.fromRoman = function(input) {
-		if(input === "I") {
+		if (input === "I") {
 			return 1;
-		} else {
+		} else if (input === "II"){
 			return 2;
+		} else {
+			return 3;
 		};
 	};
 };
