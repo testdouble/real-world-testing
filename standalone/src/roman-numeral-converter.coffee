@@ -11,47 +11,54 @@ window.ConvertsNumerals = class ConvertsNumerals
 
   fromRoman: (roman) ->
     # check the type
+    if typeof roman != 'string'
+      return undefined
 
     # split into an array of individual numerals
+    numerals = roman.split('')
 
-    # perform initial validation of the numerals
-      # ensure all numerals are valid roman numerals
-      # if 2 consecutive numerals, all following numerals must
-      # be <= that numeral value to validate that there are not
-      # multiple values being subtracted
+    # ensure all numerals are valid roman numerals
+    for numeral in numerals
+      if not @VALUES.hasOwnProperty(numeral)
+        return undefined
 
-    # for each of the numerals
-      # get the mapped value
-      # get the next numeral's mapped value
-      # if no next value or if the value is greater than or equal to the next value
-        # add the value to the sum
-      # else if the value is less than the next value
-        # validate that the value is a power of 10
-        # validate that the value is >= 1/10 of the next value
-        # subtract the value from the sum
-    # return sum
+    # if 2 consecutive numerals, all following numerals must
+    # be <= that numeral value to validate that there are not
+    # multiple values being subtracted
 
+    nextCannotBeLarger = false
+    hasInvalidSubtraction = false
 
+    numerals
+      .map((numeral) =>
+        return @VALUES[numeral])
+      .reduce((prev, value) =>
+        if value == prev
+          nextCannotBeLarger = true
+        else if value > prev and nextCannotBeLarger
+          hasInvalidSubtraction = true
+        accum = value)
 
+    if hasInvalidSubtraction
+      return undefined
 
+    sum = 0
 
+    for numeral, index in numerals
+      value = @VALUES[numeral]
+      nextNumeral = numerals[index + 1]
+      nextValue = @VALUES[nextNumeral]
 
+      if not nextValue or value >= nextValue
+        sum += value
+      else if value < nextValue
+        isPowerOfTen = [1, 10, 100].indexOf(value) > -1
 
+        isAtLeastTenPercentOfNext = (value / nextValue >= 0.1)
 
+        if not isPowerOfTen or not isAtLeastTenPercentOfNext
+          return undefined
 
+        sum -= value
+    return sum
 
-
-
-###
-    result = @VALUES[roman]
-    if !result
-      digits = roman.split('')
-      sum = 0
-      for d in digits
-        sum += @VALUES[d]
-      return sum
-    result
-###
-
-  fromArabic: (arabic) ->
-    "I"
